@@ -1,0 +1,73 @@
+USER
+
+const mongoose = require("mongoose");
+
+const Schema = mongoose.Schema;
+
+const userSchema = new Schema({
+  firstname: { type: String, required: true },
+  lastname: { type: String, required: true },
+  email: { type: String, required: true },
+  password: { type: String, required: true },
+  order: [{ type: mongoose.Types.ObjectId, require: true, ref: "Order" }],
+});
+
+module.exports = mongoose.model("User", userSchema); //returneaza un constuctor
+
+
+RESTAURANT
+
+const mongoose = require("mongoose");
+
+const Schema = mongoose.Schema;
+
+const restaurantSchema = new Schema({
+  name: { type: String, require: true },
+  schedule: { type: String, required: true },
+  minimumOrder: { type: Number, required: true },
+  standardDeliveryMaximumDistance: { type: Number, required: true },
+  standardDeliceryPrice: { type: Number, required: true },
+  extraDeliveryFee: { type: Number, required: true },
+  order: [{ type: mongoose.Types.ObjectId, require: true, ref: "Order" }],
+  item: [{ type: mongoose.Types.ObjectId, require: true, ref: "Item" }],
+});
+
+module.exports = mongoose.model("Restaurant", restaurantSchema); //returneaza un constuctor
+
+
+
+ORDER
+
+const mongoose = require("mongoose");
+
+const Schema = mongoose.Schema;
+
+const orderSchema = new Schema({
+  name: { type: String, require: true },
+  address: { type: String, required: true },
+  distance: { type: Number, required: true },
+  orderMentions: { type: Number, required: true },
+  restaurant: {
+    type: mongoose.Types.ObjectId,
+    require: true,
+    ref: "Restaurant",
+  },
+  user: { type: mongoose.Types.ObjectId, require: true, ref: "User" },
+});
+
+module.exports = mongoose.model("Order", orderSchema); //returneaza un constuctor
+
+
+ITEM
+
+const mongoose = require("mongoose");
+
+const Schema = mongoose.Schema;
+
+const itemSchema = new Schema({
+  name: { type: String, require: true },
+  description: { type: String, required: true },
+  price: { type: Number, required: true },
+});
+
+module.exports = mongoose.model("Item", itemSchema); //returneaza un constuctor
