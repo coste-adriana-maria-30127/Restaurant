@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Card from "../../shared/components/UIElements/Card";
-import OrderItem from "./OrderItem";
 import Button from "../../shared/components/FormElements/Button";
+import OrderItem from "../components/OrderItem";
 import "./OrderList.css";
 
 const OrderList = (props) => {

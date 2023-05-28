@@ -4,9 +4,11 @@ import { useHttpClient } from "../../shared/hooks/http-hook";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import OrderList from "../components/OrderList";
+import { Card } from "@mui/material";
+import Typography from "@mui/material/Typography";
 
 const Order = () => {
-  const [loadedRestaurant, setLoadedRestaurant] = useState();
+  const [loadedItems, setLoadedItems] = useState();
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
   const restaurantId = useParams().rid;
@@ -16,14 +18,14 @@ const Order = () => {
     const fetchRestaurant = async () => {
       try {
         const responsData = await sendRequest(
-          `http://localhost:8000/api/restaurants/${restaurantId}`
+          `http://localhost:8000/api/restaurants/${restaurantId}/items`
         );
-        setLoadedRestaurant(responsData.restaurant);
+        setLoadedItems(responsData.items);
       } catch (err) {}
     };
     fetchRestaurant();
   }, [sendRequest]);
-  console.log(loadedRestaurant);
+  console.log(loadedItems);
 
   return (
     <React.Fragment>
@@ -34,7 +36,12 @@ const Order = () => {
         </div>
       )}
 
-      {!isLoading && loadedRestaurant && <OrderList items={loadedRestaurant} />}
+      <Card style={{ display: "flex", margin: "5px" }}>
+        <Typography>MENU</Typography>
+      </Card>
+
+      {!isLoading && loadedItems && <OrderList items={loadedItems} />}
+      <Card></Card>
     </React.Fragment>
   );
 };

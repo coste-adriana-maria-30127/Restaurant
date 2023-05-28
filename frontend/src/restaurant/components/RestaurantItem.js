@@ -9,7 +9,7 @@ import Card from "../../shared/components/UIElements/Card";
 const RestaurantItem = (props) => {
   console.log(props.id);
   return (
-    <li className="place-item">
+    <li>
       <Card elevation={6}>
         <CardContent>
           <Typography gutterBoottom variant="h6">
@@ -33,7 +33,7 @@ const RestaurantItem = (props) => {
             </Typography>
           </Box>
         </CardContent>
-        <div className="place-item__actions">
+        <div className="user-item__actions">
           <Button to={`/order/${props.id}`}>ORDER</Button>
         </div>
       </Card>

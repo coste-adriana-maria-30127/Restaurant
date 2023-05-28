@@ -40,15 +40,27 @@ const getRestaurantById = async (req, res, next) => {
   res.json({ restaurant: restaurant.toObject({ getters: true }) });
 };
 
+const getItemsRestaurantById = async (req, res, next) => {
+  console.log(req);
+  const restaurantId = req.params.rid;
+  console.log(restaurantId);
+  let restaurant;
+  try {
+    restaurant = await Restaurant.findById(restaurantId);
+    items = restaurant.items;
+  } catch (err) {
+    const error = new HttpError(
+      "Something went wrong, could not find a item.",
+      500
+    );
+    return next(error);
+  }
+
+  res.json({ items: items.toObject({ getters: true }) });
+};
+
 const createRestaurant = async (req, res, next) => {
   console.log(req);
-  //   const errors = validationResult(req);
-  //   if (!errors.isEmpty()) {
-  //     console.log(errors);
-  //     return next(
-  //       new HttpError("Invalid inputs passed, please check your date.", 422)
-  //     );
-  //   }
 
   const {
     name,
@@ -88,3 +100,4 @@ const createRestaurant = async (req, res, next) => {
 exports.getRestaurants = getRestaurants;
 exports.getRestaurantById = getRestaurantById;
 exports.createRestaurant = createRestaurant;
+exports.getItemsRestaurantById = getItemsRestaurantById;

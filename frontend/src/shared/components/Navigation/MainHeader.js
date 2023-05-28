@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { Box, Typography, Autocomplete, InputBase } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 import "./MainHeader.css";
 
@@ -18,14 +18,7 @@ const MainHeader = (props) => {
               <Typography variant="h6" className="title">
                 Explor new places
               </Typography>
-              {/* <Autocomplete> */}
-              <div className="search">
-                <div className="searchIcon">
-                  <SearchIcon />
-                </div>
-                <InputBase placeholder="Search ..." />
-              </div>
-              {/* </Autocomplete> */}
+              <ShoppingCartIcon color="primary" />
             </Box>
           </div>
         )}
